@@ -11,12 +11,13 @@ Route::post('/login', [AuthController::class, 'login']);
 // Rutas protegidas con autenticación
 Route::middleware('auth:sanctum')->group(function () {
     
-    // Rutas de usuarios
     Route::apiResource('users', UserController::class);
     
-    // Rutas de transacciones
     Route::apiResource('transactions', TransactionController::class)->except(['destroy']);
     
-    // Ruta adicional para ver transacciones de un usuario específico
-    Route::get('transactions/user/{userId}', [TransactionController::class, 'userTransactions']);
+    Route::get('transactions/user/{userId}', [TransactionController::class, 'getUserTransactions']);
+
+    Route::get('transactions/export/csv', [TransactionController::class, 'exportCSV']);
+
+    Route::get('transactions/stats/{userId}', [TransactionController::class, 'getUserStatistics']);
 });
