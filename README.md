@@ -1,61 +1,143 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Laravel API - Prueba Técnica
 
-## About Laravel
+Este proyecto es una **API RESTful** desarrollada con **Laravel 12**, que permite la gestión de usuarios y transacciones.  
+Incluye endpoints para registro, autenticación, envío de transacciones y consulta de estadísticas.  
+Además, cuenta con documentación generada automáticamente con **Laravel Scribe**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requisitos previos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Asegúrate de tener instaladas las siguientes dependencias:
 
-## Learning Laravel
+- PHP >= 8.2
+- Composer
+- MySQL o MariaDB
+- Node.js (opcional, si usas el frontend de Laravel)
+- Git
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Instalación y configuración
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Sigue estos pasos para levantar el proyecto desde cero:
 
-## Laravel Sponsors
+### 1. Clonar el repositorio
+#En tu terminal
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+git clone https://github.com/CristobalMontecinos/api-transacciones.git
+cd api-transacciones
 
-### Premium Partners
+### 2. Instalar dependencias
+#En tu consola:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+composer install
 
-## Contributing
+### 3. Configurar el entorno
+Se adjunta archivo .env con un una base de datos dockerizada
+Para base de datos local sin docker, el .env deberia verse mas o menos asi:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+APP_NAME="API Transacciones"
+APP_ENV=local
+APP_KEY=0
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
 
-## Code of Conduct
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=api_transacciones
+DB_USERNAME=root
+DB_PASSWORD=**Aqui poner contraseña del usuario de tu base de datos**
 
-## Security Vulnerabilities
+QUEUE_CONNECTION=database
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Una vez hecha la conexión, es importante que crees la base de datos 'api_transacciones' utilizando:**
+CREATE DATABASE api_transacciones
 
-## License
+### 4. Generar la clave de la aplicación
+#En tu consola:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+php artisan key:generate
+
+
+### 5. Ejecutar migraciones y seeders
+Esto creará las tablas y cargará datos de ejemplo (usuarios y transacciones).
+#En tu consola:
+
+php artisan migrate --seed
+
+
+### 6. Levantar el servidor de desarrollo
+#En tu consola:
+php artisan serve
+
+
+El proyecto estará disponible en:  
+http://127.0.0.1:8000
+
+---
+
+## Documentación de la API
+
+La documentación se genera automáticamente con **Laravel Scribe**.
+
+### Generar o actualizar la documentación
+#En tu consola:
+
+php artisan scribe:generate
+
+
+### Visualizar la documentación
+Accede en tu navegador a:  
+http://127.0.0.1:8000/docs
+
+---
+
+## Usuarios iniciales (Seeder)
+
+Al ejecutar `php artisan migrate --seed`, se crearán tres usuarios por defecto:
+
+| Nombre     | Email                  | Contraseña  |
+|------------|------------------------|-------------|
+| Cristobal  | cristobal@example.com  | 123456      |
+| Maria      | maria@example.com      | 123456      |
+| Juan       | juan@example.com       | 123456      |
+
+También se generan **10 transacciones aleatorias** entre estos usuarios.
+
+---
+
+## Endpoints principales
+
+Algunos endpoints disponibles (ver todos en `/docs`):
+
+| Método | Ruta                        | Descripción |
+|--------|-----------------------------|--------------|
+| POST   | `/api/login`                | Inicia sesión y obtiene el token para el resto de peticiones|
+| POST   | `/api/register`             | Registra un nuevo usuario |
+| GET    | `/api/transactions`         | Lista las transacciones |
+| POST   | `/api/transactions/send`    | Envía una transacción |
+| GET    | `/api/statistics`           | Muestra estadísticas de usuario |
+
+---
+
+## Tecnologías utilizadas
+
+- **Laravel 12**
+- **Sanctum** (autenticación API)
+- **Laravel Scribe** (documentación automática)
+- **MySQL**
+- **Faker** (datos aleatorios para seeder)
+
+---
+
+## Autor
+
+**Cristóbal Montecinos**  
+Proyecto de prueba técnica  
+cristobal.montecinos04@gmail.com
